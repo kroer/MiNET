@@ -1999,6 +1999,11 @@ namespace MiNET
 			_openInventory = inventory;
 		}
 
+		public virtual IInventory GetOpenInventory()
+		{
+			return _openInventory;
+		}
+
 		public void OpenInventory(BlockCoordinates inventoryCoord)
 		{
 			lock (_inventorySync)
