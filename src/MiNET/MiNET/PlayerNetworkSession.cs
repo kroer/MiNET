@@ -665,6 +665,11 @@ namespace MiNET
 				handler.HandleMcpeNetworkStackLatencyPacket((McpeNetworkStackLatencyPacket) message);
 			}
 
+			else if (typeof(McpePlayerSkin) == message.GetType())
+			{
+				handler.HandleMcpePlayerSkin((McpePlayerSkin) message);
+			}
+
 			else
 			{
 				Log.Error($"Unhandled packet: {message.GetType().Name} 0x{message.Id:X2} for user: {Username}, IP {EndPoint.Address}");
