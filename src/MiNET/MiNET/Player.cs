@@ -1296,8 +1296,6 @@ namespace MiNET
 
 			SendChunkRadiusUpdate();
 
-			ForcedSendChunk(SpawnPosition);
-
 			// send teleport to spawn
 			SetPosition(SpawnPosition);
 
@@ -1616,8 +1614,6 @@ namespace MiNET
 				SendPlayerInventory();
 
 				CleanCache();
-
-				ForcedSendChunk(SpawnPosition);
 
 				// send teleport to spawn
 				SetPosition(SpawnPosition);
