@@ -167,7 +167,6 @@ namespace MiNET
 			chunkData.packageId = "5abdb963-4f3f-4d97-8482-88e2049ab149";
 			chunkData.chunkIndex = 0; // Package index ?
 			chunkData.progress = 0; // Long, maybe timestamp?
-			chunkData.length = (uint) content.Length;
 			chunkData.payload = content;
 			SendPacket(chunkData);
 		}
@@ -3679,7 +3678,7 @@ namespace MiNET
 		{
 			var packet = McpeNetworkStackLatencyPacket.CreateObject();
 			packet.timestamp = message.timestamp; // don't know what is it
-			packet.isfromserver = true;
+			packet.unknownFlag = false;
 			SendPacket(packet);
 		}
 
