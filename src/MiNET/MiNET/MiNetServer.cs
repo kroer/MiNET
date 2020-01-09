@@ -109,9 +109,27 @@ namespace MiNET
 			//else iothreads *= 4;
 
 			//ThreadPool.SetMinThreads(threads, iothreads);
-			FastThreadPool = new DedicatedThreadPool(new DedicatedThreadPoolSettings(Environment.ProcessorCount));
-			LevelThreadPool = new DedicatedThreadPool(new DedicatedThreadPoolSettings(Environment.ProcessorCount));
-			_receiveThreadPool = new DedicatedThreadPool(new DedicatedThreadPoolSettings(Environment.ProcessorCount));
+			FastThreadPool = new DedicatedThreadPool(new DedicatedThreadPoolSettings(
+				Environment.ProcessorCount,
+				null,
+				null,
+				ApartmentState.Unknown,
+				(e) => { System.Console.WriteLine(e); }
+			));
+			LevelThreadPool = new DedicatedThreadPool(new DedicatedThreadPoolSettings(
+				Environment.ProcessorCount,
+				null,
+				null,
+				ApartmentState.Unknown,
+				(e) => { System.Console.WriteLine(e); }
+			));
+			_receiveThreadPool = new DedicatedThreadPool(new DedicatedThreadPoolSettings(
+				Environment.ProcessorCount,
+				null,
+				null,
+				ApartmentState.Unknown,
+				(e) => { System.Console.WriteLine(e); }
+			));
 		}
 
 		public MiNetServer(IPEndPoint endpoint) : base()
