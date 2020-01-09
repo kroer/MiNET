@@ -1,4 +1,4 @@
-#region LICENSE
+﻿#region LICENSE
 
 // The contents of this file are subject to the Common Public Attribution
 // License Version 1.0. (the "License"); you may not use this file except in
@@ -25,9 +25,9 @@
 
 namespace MiNET.Items
 {
-	public class ItemCookedPorkshop : FoodItem
+	public class ItemCookedPorkchop : FoodItem
 	{
-		public ItemCookedPorkshop() : base(320, 0, 8, 12.8)
+		public ItemCookedPorkchop() : base(320, 0, 8, 12.8)
 		{
 		}
 	}

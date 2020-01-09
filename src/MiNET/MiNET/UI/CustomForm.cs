@@ -1,4 +1,4 @@
-#region LICENSE
+﻿#region LICENSE
 
 // The contents of this file are subject to the Common Public Attribution
 // License Version 1.0. (the "License"); you may not use this file except in
@@ -52,7 +52,11 @@ namespace MiNET.UI
 			var parsedResult = JsonConvert.DeserializeObject<List<object>>(json);
 			Log.Debug($"Form JSON\n{JsonConvert.SerializeObject(parsedResult, jsonSerializerSettings)}");
 
-			if (parsedResult == null) return; // Pressed [x]
+			if (parsedResult == null)
+			{
+				Close(player);
+				return; // Pressed [x]
+			}
 
 			for (var i = 0; i < Content.Count; i++)
 			{

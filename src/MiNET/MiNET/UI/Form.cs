@@ -1,4 +1,4 @@
-#region LICENSE
+﻿#region LICENSE
 
 // The contents of this file are subject to the Common Public Attribution
 // License Version 1.0. (the "License"); you may not use this file except in
@@ -36,6 +36,9 @@ namespace MiNET.UI
 		public string Type { get; protected set; }
 		public string Title { get; set; }
 
+		[JsonIgnore]
+		protected Action<Player, Form> CloseAction { get; set; }
+
 		public string ToJson()
 		{
 			var settings = new JsonSerializerSettings();
@@ -51,5 +54,14 @@ namespace MiNET.UI
 		}
 
 		public abstract void FromJson(string json, Player player);
+
+		/// <summary>
+		/// Should be called only from FromJson method when the player close the form by pressing Esc or tap on [x].
+		/// </summary>
+		/// <param name="player"></param>
+		protected void Close(Player player)
+		{
+			CloseAction?.Invoke(player, this);
+		}
 	}
 }
