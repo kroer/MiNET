@@ -209,6 +209,7 @@ namespace MiNET.Items
 			else if (id == 331) item = new ItemRedstone();
 			else if (id == 332) item = new ItemSnowball();
 			else if (id == 333) item = new ItemBoat(metadata);
+			else if (id == 339) item = new ItemPaper();
 			else if (id == 344) item = new ItemEgg();
 			else if (id == 345) item = new ItemCompass();
 			else if (id == 351) item = new ItemDye();
