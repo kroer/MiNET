@@ -11,7 +11,7 @@ namespace MiNET.Utils
 	{
 		public override bool CanConvert(Type objectType)
 		{
-			return (objectType == typeof(IPAddress));
+			return typeof(IPAddress).IsAssignableFrom(objectType);
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
