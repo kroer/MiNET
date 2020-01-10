@@ -311,7 +311,16 @@ namespace MiNET.Client
 		public abstract void HandleMcpeMoveEntityDelta(McpeMoveEntityDelta message);
 		public abstract void HandleMcpeSetScoreboardIdentityPacket(McpeSetScoreboardIdentityPacket message);
 		public abstract void HandleMcpeUpdateSoftEnumPacket(McpeUpdateSoftEnumPacket message);
-		public abstract void HandleMcpeNetworkStackLatencyPacket(McpeNetworkStackLatencyPacket message);
+
+		public virtual void HandleMcpeNetworkStackLatencyPacket(McpeNetworkStackLatencyPacket message)
+		{
+			var packet = McpeNetworkStackLatencyPacket.CreateObject();
+			packet.timestamp = message.timestamp;
+			packet.unknownFlag = 0;
+
+			Client.SendPacket(packet);
+		}
+
 		public abstract void HandleMcpeScriptCustomEventPacket(McpeScriptCustomEventPacket message);
 		public abstract void HandleMcpeLevelSoundEventOld(McpeLevelSoundEventOld message);
 		public abstract void HandleMcpeSpawnParticleEffect(McpeSpawnParticleEffect message);
@@ -319,6 +328,8 @@ namespace MiNET.Client
 		public abstract void HandleMcpeNetworkChunkPublisherUpdate(McpeNetworkChunkPublisherUpdate message);
 		public abstract void HandleMcpeBiomeDefinitionList(McpeBiomeDefinitionList message);
 		public abstract void HandleMcpeLevelSoundEventV2(McpeLevelSoundEventV2 message);
+
+		public abstract void HandleMcpeNetworkSettingsPacket(McpeNetworkSettingsPacket message);
 
 		public abstract void HandleFtlCreatePlayer(FtlCreatePlayer message);
 

@@ -358,7 +358,6 @@ namespace MiNET
 									Log.Warn("Received fake XUID from " + data.ExtraData.DisplayName);
 									data.ExtraData.Xuid = null;
 								}
-
 								_playerInfo.CertificateData = data;
 							}
 						}
@@ -406,9 +405,6 @@ namespace MiNET
 							UseEncryption = Config.GetProperty("UseEncryptionForAll", false) || (Config.GetProperty("UseEncryption", true) && !string.IsNullOrWhiteSpace(_playerInfo.CertificateData.ExtraData.Xuid)),
 						};
 
-#if LINUX
-						_session.CryptoContext.UseEncryption = false;
-#else
 						if (_session.CryptoContext.UseEncryption)
 						{
 							// Use bouncy to parse the DER key
@@ -493,7 +489,6 @@ namespace MiNET
 
 							if (Log.IsDebugEnabled) Log.Warn($"Encryption enabled for {_session.Username}");
 						}
-#endif
 					}
 				}
 				if (!_session.CryptoContext.UseEncryption)
@@ -555,7 +550,15 @@ namespace MiNET
 		{
 		}
 
+		public void HandleMcpeTickSync(McpeTickSync message)
+		{
+		}
+
 		public void HandleMcpeLevelSoundEvent(McpeLevelSoundEvent message)
+		{
+		}
+
+		public void HandleMcpeClientCacheStatus(McpeClientCacheStatus message)
 		{
 		}
 
