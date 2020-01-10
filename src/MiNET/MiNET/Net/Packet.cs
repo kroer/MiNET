@@ -1801,7 +1801,7 @@ namespace MiNET.Net
 
 		public void Write(PotionContainerChangeRecipe[] recipes)
 		{
-
+			WriteUnsignedVarInt(0);
 		}
 
 		public PotionContainerChangeRecipe[] ReadPotionContainerChangeRecipes()
@@ -1823,7 +1823,7 @@ namespace MiNET.Net
 
 		public void Write(PotionTypeRecipe[] recipes)
 		{
-
+			WriteUnsignedVarInt(0);
 		}
 
 		public PotionTypeRecipe[] ReadPotionTypeRecipes()
