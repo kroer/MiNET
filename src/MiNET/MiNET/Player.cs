@@ -606,11 +606,11 @@ namespace MiNET
 
 					break;
 				}
-				//case PlayerAction.Respawn:
-				//{
-				//	MiNetServer.FastThreadPool.QueueUserWorkItem(HandleMcpeRespawn);
-				//	break;
-				//}
+				case PlayerAction.Respawn:
+				{
+					Respawn();
+					break;
+				}
 				case PlayerAction.Jump:
 				{
 					HungerManager.IncreaseExhaustion(IsSprinting ? 0.8f : 0.2f);
@@ -1065,66 +1065,66 @@ namespace MiNET
 			OnPlayerJoin(new PlayerEventArgs(this));
 		}
 
-		//public virtual void HandleMcpeRespawn()
-		//{
-		//	HandleMcpeRespawn(null);
-		//}
-
 		public virtual void HandleMcpeRespawn(McpeRespawn message)
 		{
 			if (message.state == (byte) McpeRespawn.RespawnState.ClientReady)
 			{
-				HealthManager.ResetHealth();
-
-				HungerManager.ResetHunger();
-
-				BroadcastSetEntityData();
-
-				SendUpdateAttributes();
-
-				SendSetSpawnPosition();
-
-				SendAdventureSettings();
-
-				SendPlayerInventory();
-
-				CleanCache();
-
-				ForcedSendChunk(SpawnPosition);
-
-				// send teleport to spawn
-				SetPosition(SpawnPosition);
-
-				Level.SpawnToAll(this);
-
-				IsSpawned = true;
-
-				Log.InfoFormat("Respawn player {0} on level {1}", Username, Level.LevelId);
-
-				SendSetTime();
-
-				MiNetServer.FastThreadPool.QueueUserWorkItem(() => ForcedSendChunks());
-
-				//SendPlayerStatus(3);
-
-				var mcpeRespawn = McpeRespawn.CreateObject();
-				mcpeRespawn.x = SpawnPosition.X;
-				mcpeRespawn.y = SpawnPosition.Y;
-				mcpeRespawn.z = SpawnPosition.Z;
-				mcpeRespawn.state = (byte) McpeRespawn.RespawnState.Ready;
-				mcpeRespawn.runtimeEntityId = EntityId;
-				SendPacket(mcpeRespawn);
-
-				////send time again
-				//SendSetTime();
-				//IsSpawned = true;
-				//LastUpdatedTime = DateTime.UtcNow;
-				//_haveJoined = true;
+				Respawn();
 			}
 			else
 			{
 				Log.Warn($"Unhandled respawn state = {message.state}");
 			}
+		}
+
+		protected virtual void Respawn()
+		{
+			HealthManager.ResetHealth();
+
+			HungerManager.ResetHunger();
+
+			BroadcastSetEntityData();
+
+			SendUpdateAttributes();
+
+			SendSetSpawnPosition();
+
+			SendAdventureSettings();
+
+			SendPlayerInventory();
+
+			CleanCache();
+
+			ForcedSendChunk(SpawnPosition);
+
+			// send teleport to spawn
+			SetPosition(SpawnPosition);
+
+			Level.SpawnToAll(this);
+
+			IsSpawned = true;
+
+			Log.InfoFormat("Respawn player {0} on level {1}", Username, Level.LevelId);
+
+			SendSetTime();
+
+			MiNetServer.FastThreadPool.QueueUserWorkItem(() => ForcedSendChunks());
+
+			//SendPlayerStatus(3);
+
+			var mcpeRespawn = McpeRespawn.CreateObject();
+			mcpeRespawn.x = SpawnPosition.X;
+			mcpeRespawn.y = SpawnPosition.Y;
+			mcpeRespawn.z = SpawnPosition.Z;
+			mcpeRespawn.state = (byte) McpeRespawn.RespawnState.Ready;
+			mcpeRespawn.runtimeEntityId = EntityId;
+			SendPacket(mcpeRespawn);
+
+			////send time again
+			//SendSetTime();
+			//IsSpawned = true;
+			//LastUpdatedTime = DateTime.UtcNow;
+			//_haveJoined = true;
 		}
 
 		[Wired]
