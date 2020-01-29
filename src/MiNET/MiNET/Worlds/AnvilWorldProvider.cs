@@ -114,6 +114,8 @@ namespace MiNET.Worlds
 						return 0;
 					})
 				},
+				{64, new Mapper(64, (i, b) => b >= 8 ? (byte) (b & 0x09) : b)}, // remove powered bit from upper door
+				{71, new Mapper(71, (i, b) => b >= 8 ? (byte) (b & 0x09) : b)}, // remove powered bit from upper door
 				{84, new NoDataMapper(25)}, // minecraft:jukebox		=> noteblock
 				{85, new Mapper(85, (i, b) => 0)}, // Fence		=> Fence
 				{95, new NoDataMapper(241)}, // minecraft:stained_glass	=> Stained Glass
@@ -151,6 +153,11 @@ namespace MiNET.Worlds
 				{190, new Mapper(85, (i, b) => 3)}, // Jungle Fence		=> Fence
 				{191, new Mapper(85, (i, b) => 5)}, // Dark Oak Fence	=> Fence
 				{192, new Mapper(85, (i, b) => 4)}, // Acacia Fence		=> Fence
+				{193, new Mapper(193, (i, b) => b >= 8 ? (byte) (b & 0x09) : b)}, // remove powered bit from upper door
+				{194, new Mapper(194, (i, b) => b >= 8 ? (byte) (b & 0x09) : b)}, // remove powered bit from upper door
+				{195, new Mapper(195, (i, b) => b >= 8 ? (byte) (b & 0x09) : b)}, // remove powered bit from upper door
+				{196, new Mapper(196, (i, b) => b >= 8 ? (byte) (b & 0x09) : b)}, // remove powered bit from upper door
+				{197, new Mapper(197, (i, b) => b >= 8 ? (byte) (b & 0x09) : b)}, // remove powered bit from upper door
 				{198, new NoDataMapper(208)}, // minecraft:end_rod	=> EndRod
 				{199, new NoDataMapper(240)}, // minecraft:chorus_plant
 				{202, new Mapper(201, (i, b) => 2)}, // minecraft:purpur_pillar => PurpurBlock:2 (idk why)

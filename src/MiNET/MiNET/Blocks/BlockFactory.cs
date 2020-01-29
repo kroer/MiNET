@@ -87,10 +87,15 @@ namespace MiNET.Blocks
 				BlockPallet = BlockPallet.FromJson(reader.ReadToEnd());
 			}
 			int palletSize = BlockPallet.Count;
+			
 			for (int i = 0; i < palletSize; i++)
 			{
-				if (BlockPallet[i].Data > 15) continue; // TODO: figure out why pallet contains blocks with meta more than 15
-				LegacyToRuntimeId[(BlockPallet[i].Id << 4) | (byte) BlockPallet[i].Data] = i;
+				int legacyId = (BlockPallet[i].Id << 4) | (byte) BlockPallet[i].Data;
+				// need to skip if legacy id was used earlier
+				// it works only for block with some unsufficient fields (etc. doors)
+				// An upper door doesn't use the third bit but the palette contains all variations
+				if (LegacyToRuntimeId[legacyId] != -1 && LegacyToRuntimeId[legacyId] < i) continue;
+				LegacyToRuntimeId[legacyId] = i;
 			}
 		}
 
