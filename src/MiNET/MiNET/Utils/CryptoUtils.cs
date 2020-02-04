@@ -117,7 +117,7 @@ namespace MiNET.Utils
 
 				Span<byte> validationCheckSum = crypt.ComputeHash(hashBuffer, 0, hashBuffer.Length);
 
-				Span<byte> clear = stackalloc byte[payload.Length + 8];
+				Span<byte> clear = payload.Length + 8 <= 1024 ? stackalloc byte[payload.Length + 8] : new byte[payload.Length + 8];
 				payload.Span.CopyTo(clear);
 				validationCheckSum.Slice(0, 8).CopyTo(clear.Slice(payload.Length));
 
